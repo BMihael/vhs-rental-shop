@@ -18,4 +18,7 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
 
     @Query(value = "SELECT DATEDIFF(day, CURRENT_DATE(), rental.enddate) FROM rental where vhsid = ?1", nativeQuery = true)
     Integer getFeeDays(Long id);
+
+    @Query(value = "SELECT EXISTS(SELECT * FROM rental WHERE vhsid = ?1)", nativeQuery = true)
+    Boolean findVhsIsRented(Long id);
 }

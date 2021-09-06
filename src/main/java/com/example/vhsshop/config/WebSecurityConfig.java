@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -48,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             authorizeRequests()
             .antMatchers("/api/vhs/**").hasAnyRole("ADMIN","USER")
             .antMatchers("/api/rental/**").hasRole("ADMIN")
+                .antMatchers("/api/user/**").hasRole("ADMIN")
             .antMatchers("/h2-console/**").permitAll()
             .anyRequest()
             .authenticated()

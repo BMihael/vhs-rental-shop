@@ -1,12 +1,12 @@
 package com.example.vhsshop.service.impl;
 
-import com.example.vhsshop.exception.RentalNotFoundException;
-import com.example.vhsshop.exception.RentalOnSameDateForbiddenException;
-import com.example.vhsshop.exception.UserDoesNotContainRentalException;
+import com.example.vhsshop.exception.*;
 import com.example.vhsshop.mapper.MapStructMapper;
 import com.example.vhsshop.mapper.dto.RentalDto;
 import com.example.vhsshop.mapper.form.RentalForm;
 import com.example.vhsshop.model.Rental;
+import com.example.vhsshop.model.Role;
+import com.example.vhsshop.model.Roles;
 import com.example.vhsshop.model.response.RentalResponseMessage;
 import com.example.vhsshop.model.User;
 import com.example.vhsshop.model.response.ResponseMessage;
@@ -15,10 +15,8 @@ import com.example.vhsshop.service.RentalService;
 import com.example.vhsshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 @Service
 public class RentalServiceImpl implements RentalService {
@@ -43,6 +41,7 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public List<RentalDto> getRentalsByUser(Long id) {
+        User user = userService.get(id);
         List<Rental> list = rentalRepository.findRentalByUserId(id);
         return mapper.rentalListToRentalDtoList(list);
     }
@@ -56,7 +55,7 @@ public class RentalServiceImpl implements RentalService {
         }
 
         String message = "";
-        Integer feeDays = rentalRepository.getFeeDays(id);
+        Integer feeDays = rentalRepository.getFeeDays(rental.get().getVhs().getId());
         if(feeDays<0){
             message += " You are late! Fee to be paid is: " + Math.abs(feeDays*5);
         }
@@ -64,14 +63,27 @@ public class RentalServiceImpl implements RentalService {
         return new RentalResponseMessage("Rental returned!" + message);
     }
 
+
+    private void checkUserRole(User user){
+        for(Role role : user.getRoles()){
+            if(role.getName().equals(Roles.ROLE_ADMIN.name()))
+                throw new UserIsAdminException("Cannot rent vhs to admin!");
+        }
+    }
+
     @Override
     public RentalDto saveRental(RentalForm rentalForm) {
         User user = userService.get(rentalForm.getUserId());
+        checkUserRole(user);
 
         Rental rental = mapper.rentalFormToRental(rentalForm);
 
         Date date = new Date();
         rental.setOrderDate(date);
+
+        if(rentalForm.getEndDate().before(date)){
+            throw new RentalEndDateInvalidException("Rental end date cannot be before order date!");
+        }
         rental.setEndDate(rentalForm.getEndDate());
         rental.setUser(user);
 
@@ -89,11 +101,21 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public ResponseMessage updateRental(RentalForm rentalForm, Long rentalId) {
         User user = userService.get(rentalForm.getUserId());
+        checkUserRole(user);
 
         Optional<Rental> rentalOptional = rentalRepository.findById(rentalId);
 
         if(rentalOptional.get().getUser().getId()!=user.getId()){
-            throw new UserDoesNotContainRentalException("User does not contain rental!");
+            throw new UserDoesNotContainRentalException("User does not contain this rental!");
+        }
+
+        if(rentalForm.getEndDate().before(rentalOptional.get().getOrderDate())){
+            throw new RentalEndDateInvalidException("Rental end date cannot be before order date!");
+        }
+
+        Long vhsId = rentalForm.getVhs().getId();
+        if(rentalIsAlreadyRented(vhsId)){
+            throw new VhsIsAlreadyRentedException("Vhs with id " + vhsId + " is already rented!");
         }
 
         if(rentalOptional.isPresent()){
@@ -105,5 +127,10 @@ public class RentalServiceImpl implements RentalService {
             return new RentalResponseMessage("Rental updated");
         }
         throw new RentalNotFoundException("Rental not found!");
+    }
+
+
+    private boolean rentalIsAlreadyRented(Long id){
+        return rentalRepository.findVhsIsRented(id);
     }
 }
