@@ -35,11 +35,4 @@ public class UserServiceImpl implements UserService {
         User user = get(id);
         return mapper.userToUserDto(user);
     }
-
-    @Override
-    public ResponseMessage deleteUser(Long id) {
-        User user = get(id);
-        userRepository.deleteById(id);
-        return new UserResponseMessage("User deleted!");
-    }
 }

@@ -2,14 +2,63 @@ INSERT INTO VHS (name) VALUES ('Avengers');
 INSERT INTO VHS (name) VALUES ('Avengers Age of Ultron');
 INSERT INTO VHS (name) VALUES ('Avengers Infinity War');
 INSERT INTO VHS (name) VALUES ('Avengers Endgame');
+INSERT INTO VHS (name) VALUES ('The Shawshank Redemption');
+INSERT INTO VHS (name) VALUES ('The Godfather');
+INSERT INTO VHS (name) VALUES ('The Dark Knight');
+INSERT INTO VHS (name) VALUES ('The Godfather: Part II');
+INSERT INTO VHS (name) VALUES ('The Dark Knight');
+INSERT INTO VHS (name) VALUES ('12 Angry Men');
+INSERT INTO VHS (name) VALUES ('Schindlers List');
+INSERT INTO VHS (name) VALUES ('The Lord of the Rings: The Return of the King');
+INSERT INTO VHS (name) VALUES ('Pulp Fiction');
+INSERT INTO VHS (name) VALUES ('The Good, the Bad and the Ugly');
+INSERT INTO VHS (name) VALUES ('The Lord of the Rings: The Fellowship of the Ring');
+INSERT INTO VHS (name) VALUES ('Fight Club');
+INSERT INTO VHS (name) VALUES ('Forrest Gump');
+INSERT INTO VHS (name) VALUES ('Inception');
+INSERT INTO VHS (name) VALUES ('The Lord of the Rings: The Two Towers');
+INSERT INTO VHS (name) VALUES ('Star Wars: Episode V - The Empire Strikes Back');
+INSERT INTO VHS (name) VALUES ('The Matrix');
+INSERT INTO VHS (name) VALUES ('Goodfellas');
+INSERT INTO VHS (name) VALUES ('One Flew Over the Cuckoos Nest');
+INSERT INTO VHS (name) VALUES ('Seven Samurai');
+INSERT INTO VHS (name) VALUES ('Se7en');
+INSERT INTO VHS (name) VALUES ('The Silence of the Lambs');
+INSERT INTO VHS (name) VALUES ('City of God');
+INSERT INTO VHS (name) VALUES ('Life Is Beautiful');
+INSERT INTO VHS (name) VALUES ('Its a Wonderful Life');
+INSERT INTO VHS (name) VALUES ('Star Wars: Episode IV - A New Hope');
+INSERT INTO VHS (name) VALUES ('Saving Private Ryan');
+INSERT INTO VHS (name) VALUES ('Interstellar');
+INSERT INTO VHS (name) VALUES ('Spirited Away');
+INSERT INTO VHS (name) VALUES ('The Green Mile');
+INSERT INTO VHS (name) VALUES ('Parasite');
+INSERT INTO VHS (name) VALUES ('Leon: The Professional');
+INSERT INTO VHS (name) VALUES ('Hara-Kiri');
+INSERT INTO VHS (name) VALUES ('The Pianis');
+INSERT INTO VHS (name) VALUES ('The Usual Suspects');
+INSERT INTO VHS (name) VALUES ('Terminator 2: Judgment Day');
 
-INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 1, 2);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 1, 3);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 10, 4);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 22, 4);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 33, 3);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 5, 3);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 7, 3);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 11, 4);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 25, 4);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 36, 3);
+INSERT INTO RENTAL (orderDate, endDate, vhsid, userid) VALUES (CURRENT_DATE(), CURRENT_DATE() +10, 40, 3);
 
 INSERT INTO `roles` (`name`) VALUES ('ROLE_ADMIN');
 INSERT INTO `roles` (`name`) VALUES ('ROLE_USER');
 
-INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('miha', '$2a$12$rSmZsoZVbtDSaU3EnZKUGusMSMoeSgdPDwobuoyBZdeK.cTqi6Gbi', '1');
-INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('belko', '$2a$12$REIGPEtclR1T2B4TmrskeO.CaGKX54foY9IqtmXvJ4D08QNzVHMna', '1');
+INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('worker1', '$2a$12$402m9jLPCf8pX3vaG2wK0OLKuM/47HnaIbDpLaVGkH0AFvKkEJhhe', '1');
+INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('worker2', '$2a$12$MiKkmc3254pbsi5Lvmg9C.T5i5uJ.rKLYqJlCUlEsvM86z7A58xCa', '1');
+INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('user1', '$2a$12$fguvT2ME7qG7XXVhMd6wauYorxMXppVtQWlhAz/9GuSyM9O3lC5MW', '1');
+INSERT INTO `users` (`username`, `password`, `enabled`) VALUES ('user2', '$2a$12$K/SorxrxXh2.dxAcefmVg.Wkh4myzZA0.K5P02bKXhX2Yfx70HLVq', '1');
 
-INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 1); -- user miha has role ADMIN
-INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (2, 2); -- user belko has role USER
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 1);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (2, 1);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (3, 2);
+INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (4, 2);

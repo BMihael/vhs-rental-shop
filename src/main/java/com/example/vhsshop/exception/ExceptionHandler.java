@@ -61,6 +61,33 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(value
+            = {RentalEndDateInvalidException.class})
+    protected ResponseEntity<Object> handleRentalEndDateInvalidExceptions(
+            RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(value
+            = {VhsIsAlreadyRentedException.class})
+    protected ResponseEntity<Object> handleVhsAlreadyRentedFoundExceptions(
+            RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(value
+            = {UserIsAdminException.class})
+    protected ResponseEntity<Object> handleUserIsAdminExceptions(
+            RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.info(ex.getClass().getName());

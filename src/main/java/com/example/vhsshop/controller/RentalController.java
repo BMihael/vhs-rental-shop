@@ -42,7 +42,7 @@ public class RentalController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseMessage> updateRental(@RequestBody final RentalForm rentalForm, @PathVariable Long id){
+    public ResponseEntity<ResponseMessage> updateRental(@Valid @RequestBody final RentalForm rentalForm, @PathVariable Long id){
         return new ResponseEntity<ResponseMessage>(rentalService.updateRental(rentalForm, id),HttpStatus.OK);
     }
 
