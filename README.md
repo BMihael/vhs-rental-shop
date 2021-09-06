@@ -4,8 +4,7 @@ We are creating a cutting edge VHS rental application management system for our 
 
 Link Swagger: https://app.swaggerhub.com/apis/FallenCharge/VHS_Store/1.0.0
 
-Username:
-Password:
+Username and password:
 
 |         | #Worker1  | #Worker2  | #User1 | #User2
 | :-----: | :-: | :-: | :-: | :-: |
