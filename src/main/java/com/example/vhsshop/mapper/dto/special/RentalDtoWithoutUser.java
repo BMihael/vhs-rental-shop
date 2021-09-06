@@ -1,9 +1,7 @@
 package com.example.vhsshop.mapper.dto.special;
 
-import com.example.vhsshop.mapper.dto.UserDto;
 import com.example.vhsshop.mapper.dto.VhsDto;
 import lombok.Data;
-
 import java.util.Date;
 
 @Data

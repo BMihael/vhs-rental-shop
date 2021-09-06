@@ -24,5 +24,4 @@ public class UserController {
     public ResponseEntity<ResponseMessage> deleteUser(@PathVariable Long id){
         return new ResponseEntity<ResponseMessage>(userService.deleteUser(id), HttpStatus.OK);
     }
-
 }

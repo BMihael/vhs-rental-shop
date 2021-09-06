@@ -11,10 +11,8 @@ import com.example.vhsshop.model.response.RentalResponseMessage;
 import com.example.vhsshop.model.User;
 import com.example.vhsshop.model.response.ResponseMessage;
 import com.example.vhsshop.repository.RentalRepository;
-import com.example.vhsshop.repository.VhsRepository;
 import com.example.vhsshop.service.RentalService;
 import com.example.vhsshop.service.UserService;
-import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Calendar;
@@ -74,7 +72,6 @@ public class RentalServiceImpl implements RentalService {
 
         Date date = new Date();
         rental.setOrderDate(date);
-        //rental.setEndDate(getEndDate(date,rentalForm.getDuration()));
         rental.setEndDate(rentalForm.getEndDate());
         rental.setUser(user);
 
@@ -101,26 +98,12 @@ public class RentalServiceImpl implements RentalService {
 
         if(rentalOptional.isPresent()){
             Rental rental = rentalOptional.get();
-            //Rental rental = mapper.rentalFormToRental(rentalForm);
             rental.setId(rentalId);
-            //rental.setDuration(rentalForm.getDuration());
-            //rental.setEndDate(getEndDate(rental.getOrderDate(),rentalForm.getDuration()));
             rental.setEndDate(rentalForm.getEndDate());
-
-            //rental.setVhs(vhsRepository.findById(rentalForm.getVhs().getId()).get());
             rental.setVhs(mapper.vhsDtoToVhs(vhsService.getVhsById(rentalForm.getVhs().getId())));
             rentalRepository.save(rental);
             return new RentalResponseMessage("Rental updated");
         }
         throw new RentalNotFoundException("Rental not found!");
-    }
-
-    private Date getEndDate(Date startDate, Integer days){
-        Date endDate = startDate;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(endDate);
-        cal.add(Calendar.DATE, days);
-        endDate = cal.getTime();
-        return endDate;
     }
 }

@@ -42,5 +42,4 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
         return new UserResponseMessage("User deleted!");
     }
-
 }

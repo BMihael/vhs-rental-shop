@@ -2,11 +2,8 @@ package com.example.vhsshop.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -25,7 +22,6 @@ public class Rental {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
-    //ovdje je bilo cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}
     @ManyToOne(targetEntity = Vhs.class)
     @JoinColumn(name = "vhsId", updatable = true, nullable = true)
     @JsonIgnore

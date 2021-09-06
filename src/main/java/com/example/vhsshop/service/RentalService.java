@@ -3,9 +3,8 @@ package com.example.vhsshop.service;
 import com.example.vhsshop.mapper.dto.RentalDto;
 import com.example.vhsshop.mapper.form.RentalForm;
 import com.example.vhsshop.model.response.ResponseMessage;
-
 import java.util.List;
-import java.util.Optional;
+
 
 public interface RentalService {
     List<RentalDto> getRentals();
