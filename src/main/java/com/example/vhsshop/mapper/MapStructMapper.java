@@ -21,7 +21,6 @@ public interface MapStructMapper {
     List<RentalDto> rentalListToRentalDtoList(List<Rental> rental);
     UserDto userToUserDto(User user);
 
-
     //Form
     Rental rentalFormToRental(RentalForm rentalForm);
 }
