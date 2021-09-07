@@ -7,7 +7,6 @@ import java.util.Date;
 @Data
 public class RentalDtoWithoutUser {
     private Long id;
-    private Integer duration;
     private Date orderDate;
     private VhsDto vhs;
 }
