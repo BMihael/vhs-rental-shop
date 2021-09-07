@@ -3,7 +3,7 @@
 We are creating a cutting edge VHS rental application management system for our special clients that value the old time retro VHS experince. 
 
 Link Swagger: https://app.swaggerhub.com/apis/FallenCharge/VHS_Store/1.0.0  
-Postman: https://www.postman.com/collections/5ea9c015d72fcfea8683
+Postman: https://www.getpostman.com/collections/25d9e7cb4172f3d99f76
 
 Username and password:
 
