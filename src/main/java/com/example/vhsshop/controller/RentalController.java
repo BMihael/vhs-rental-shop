@@ -46,7 +46,7 @@ public class RentalController {
         return new ResponseEntity<ResponseMessage>(rentalService.updateRental(rentalForm, id),HttpStatus.OK);
     }
 
-    @DeleteMapping("/return/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ResponseMessage> deleteRental(@PathVariable Long id){
         return new ResponseEntity<ResponseMessage>(rentalService.deleteRental(id),HttpStatus.OK);
     }
